@@ -1,0 +1,71 @@
+la base de donnée
+=================
+
+C:\Program Files\MongoDB
+
+
+https://docs.mongodb.com/manual/tutorial/install-mongodb-enterprise-on-windows/
+
+Set up the MongoDB environment.
+md md E:\nodeproject\marcproject\data\db
+=>create md E:\nodeproject\marcproject\data\db
+
+md md E:\nodeproject\marcproject\data\db\log
+=>create md E:\nodeproject\marcproject\data\db\log
+
+
+Creer fichier d'environnement
+C:\Program Files\MongoDB\Server\3.4\mongod.cfg
+
+
+
+lancer mongodb
+cmd.exe mode admin
+"C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --config "C:\Program Files\MongoDB\Server\3.4\mongod.cfg"
+
+
+La log dans 
+-----------
+E:\nodeproject\marcproject\data\db\log\mongod.log
+
+
+
+
+Port 27017
+
+========================================
+node 
+========================================
+lancer 
+E:\node-v0.10.31\Debug\node.exe apps.js
+
+"C:\Program Files\nodejs\node.exe"  app.js
+
+*******************
+DEBUG DE NODE JS
+*******************
+
+
+
+"C:\Program Files\nodejs\node.exe" --inspect app.js
+
+chrome://inspect/#devices
+
+
+
+
+========================================================================
+npm
+===================================================================
+
+E:\nodeproject
+
+npm install async --save
+npm install --save moment -g
+
+
+===============================================
+nodemon
+==========================================================================================
+C:\Users\jpl.DSONE\AppData\Roaming\npm\node_modules\nodemon\bin
+

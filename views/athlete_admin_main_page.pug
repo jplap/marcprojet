@@ -1,0 +1,19 @@
+extends layout_main
+
+block content
+  h1= title
+  
+  
+
+  if error
+    p Error getting dynamic content.
+  else
+    p The library has the following record counts:
+
+    ul
+      
+      li #[strong Athletes:] !{data.athlete_count}
+
+
+
+  

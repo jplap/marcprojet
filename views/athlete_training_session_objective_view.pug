@@ -1,0 +1,86 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    
+block content
+    h1 Data Graph:
+    div(class='row')
+         
+         -var mydata = data;
+          
+         div(class='col-md-1')
+           button(onclick="draw('" + mydata + "')", title="Edit")
+            |Edit  
+         div(class='col-md-1')   
+           button(onclick='', title="Exit")
+            |Exit       
+         
+         
+         
+    div(class="chart")        
+     
+    canvas(id="chartPic" width="200" height="200")
+script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
+script. 
+    draw = function( xxx ) {
+     
+     
+     var red="#FA123C", green="#06FD2B", blue="#4C06FD";
+      
+     var ctx = document.getElementById("chartPic").getContext('2d');
+     var xxx = xxx.trim();
+	
+     //var obj = JSON.parse( '[{ "date":"d1", "value":"30"},{ "date":"d2", "value":"40"}]' );
+     
+     var obj = JSON.parse( xxx );
+     var objnames =[];
+     var objvalues =[];
+     var objbackgroundcolor=[];
+ 
+     for (var prop in obj) {
+        //alert( "==>" + obj[prop].date);
+        objnames.push( obj[prop].date );
+        objvalues.push( obj[prop].value );
+        objbackgroundcolor.push( "blue" );
+        
+        
+     }
+     //alert("coucou:" + objnames);
+      
+      
+           var chart = new Chart(ctx,  {
+             type: 'bar',
+             data: {
+                //labels: ["red", "green", "blue"],
+                labels: objnames,
+                datasets: [{
+                    label: 'Number of votes',
+                    //data: [1, 1, 1],
+                    data: objvalues,
+                    //backgroundColor: [red, green, blue],
+                    backgroundColor: objbackgroundcolor,
+                    //borderColor: [green, blue, red],
+                     
+                    borderWidth: 1
+                }],
+                },
+             options: {
+                title: { 
+                    display: true,
+                    text: "chart",
+                },
+                legend: {
+                    position: 'bottom'
+                },
+            }
+        });
+        //chart();
+
+    };

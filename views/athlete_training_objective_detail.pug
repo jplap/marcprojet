@@ -1,0 +1,20 @@
+extends athlete_layout_main_training
+
+
+	
+block content
+  //- h1 Welcome to #[strong #{title}] main page.
+  h2 #{title1} 
+  
+  p #[strong titlel:] #{objective_detail.obj_title}
+  p #[strong detail:] #{objective_detail.obj_detail}
+  p #[strong status:] #{objective_detail.status}
+  p #[strong create:] #{objective_detail.created_at}
+  p #[strong update:] #{objective_detail.updated_at}
+  
+  hr
+  p
+    a(href=objective_detail.url+'/delete') Delete Objective
+  
+  p
+    a(href=objective_detail.url+'/update') Update Objective

@@ -1,0 +1,319 @@
+extends athlete_layout_main_training_session
+
+
+	
+block content
+  //- h1 Welcome to #[strong #{title}] main page.
+  h2 #{title1} 
+  
+  div(class='row')
+   div(class='col-md-1')
+      form(method='GET' action=objective_detail.url + '/delete' )
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="Delete")
+   
+   div(class='col-md-1')
+      form(method='GET' action=objective_detail.url + '/update' )
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="Update")
+
+   div(class='col-md-1')
+      form(method='GET' action='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objectives' )
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="List")
+
+   div(class='col-md-1')
+      form(method='GET' action='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objective' )
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="Create")
+   
+  br
+  
+  div(class='row')
+    div(class='col-md-5')
+      table(class='table table-bordered table-hover')
+       tr
+         td 
+           b Title
+         td 
+           b Begin
+         td 
+           b End
+         td 
+           b Term
+         td 
+           b Status
+          
+         tr
+            td #{objective_detail.obj_title}      
+            td #{moment(objective_detail.date_of_begin).format('DD dddd hh:mm')}          
+            td #{moment(objective_detail.date_of_end).format('DD dddd hh:mm')}          
+            - begin = objective_detail.date_of_begin
+            - end = objective_detail.date_of_end
+            - diff = moment(end).unix() - moment(start).unix();
+       
+            td #{moment(diff).format(' hh:mm')}
+            td #{objective_detail.status}
+  div(class='row')
+    div(class='col-md-5')
+      table(class='table table-bordered table-hover')
+       tr
+         td(style="text-align:center") 
+          b Detail
+         
+         tr
+            td #{objective_detail.obj_detail}      
+			
+  div(class='row')
+    div(class='col-md-5')
+      table(class='table table-bordered table-hover')
+       tr
+         td 
+           b Physical Before
+         td 
+           b Physical After
+         td 
+           b Training Score
+         td 
+           b Trainer Score
+         td 
+           b Technical Level
+         td 
+           b Mental Level  
+          
+         tr
+            td #{objective_detail.physicallevelbefore}
+               -var myclassname = "progressbar";
+               if objective_detail.physicallevelbefore >2
+                  -myclassname = "progress-bar progress-bar-success";
+               else if objective_detail.physicallevelbefore == 2
+                  -myclassname = "progress-bar progress-bar-info";
+               else if objective_detail.physicallevelbefore == 1
+                  -myclassname = "progress-bar progress-bar-warning";
+               else if objective_detail.physicallevelbefore == 0
+                  -myclassname = "progress-bar progress-bar-danger";
+               div(class='progress')
+                  div( class=myclassname role="progress-bar" aria-valuenow=objective_detail.physicallevelafter*25 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:" + objective_detail.physicallevelbefore*25 + "%;")
+            td #{objective_detail.physicallevelafter}
+               -var myclassname = "progressbar";
+               if objective_detail.physicallevelafter >2
+                  -myclassname = "progress-bar progress-bar-success";
+               else if objective_detail.physicallevelafter == 2
+                  -myclassname = "progress-bar progress-bar-info";
+               else if objective_detail.physicallevelafter == 1
+                  -myclassname = "progress-bar progress-bar-warning";
+               else if objective_detail.physicallevelafter == 0
+                  -myclassname = "progress-bar progress-bar-danger";
+               div(class='progress')
+                  div( class=myclassname role="progress-bar" aria-valuenow=objective_detail.physicallevelafter*25 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:" + objective_detail.physicallevelafter*25 + "%;")
+            td #{objective_detail.scoretraining}
+               -var myclassname = "progressbar";
+               if objective_detail.scoretraining >2
+                  -myclassname = "progress-bar progress-bar-success";
+               else if objective_detail.scoretraining == 2
+                  -myclassname = "progress-bar progress-bar-info";
+               else if objective_detail.scoretraining == 1
+                  -myclassname = "progress-bar progress-bar-warning";
+               else if objective_detail.scoretraining == 0
+                  -myclassname = "progress-bar progress-bar-danger";
+               div(class='progress')
+                  div( class=myclassname role="progress-bar" aria-valuenow=objective_detail.scoretraining*25 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:" + objective_detail.scoretraining*25 + "%;")
+            td #{objective_detail.scoretrainer}
+               -var myclassname = "progressbar";
+               if objective_detail.scoretrainer >2
+                  -myclassname = "progress-bar progress-bar-success";
+               else if objective_detail.scoretrainer == 2
+                  -myclassname = "progress-bar progress-bar-info";
+               else if objective_detail.scoretrainer == 1
+                  -myclassname = "progress-bar progress-bar-warning";
+               else if objective_detail.scoretrainer == 0
+                  -myclassname = "progress-bar progress-bar-danger";
+               -console.log("objective_detail.scoretrainer:" + objective_detail.scoretrainer + " myclassname:" + myclassname);
+               div(class='progress')
+                  div( class=myclassname role="progress-bar" aria-valuenow=objective_detail.scoretrainer*25 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:" + objective_detail.scoretrainer*25 + "%;")
+            td #{objective_detail.technicallevel}
+               -var myclassname = "progressbar";
+               if objective_detail.technicallevel >2
+                  -myclassname = "progress-bar progress-bar-success";
+               else if objective_detail.technicallevel == 2
+                  -myclassname = "progress-bar progress-bar-info";
+               else if objective_detail.technicallevel == 1
+                  -myclassname = "progress-bar progress-bar-warning";
+               else if objective_detail.technicallevel == 0
+                  -myclassname = "progress-bar progress-bar-danger";
+               div(class='progress')
+                  div( class=myclassname role="progress-bar" aria-valuenow=objective_detail.technicallevel*25 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:" + objective_detail.technicallevel*25 + "%;")
+            td #{objective_detail.mentallevel}
+               -var myclassname = "progressbar";
+               if objective_detail.mentallevel >2
+                  -myclassname = "progress-bar progress-bar-success";
+               else if objective_detail.mentallevel == 2
+                  -myclassname = "progress-bar progress-bar-info";
+               else if objective_detail.mentallevel == 1
+                  -myclassname = "progress-bar progress-bar-warning";
+               else if objective_detail.mentallevel == 0
+                  -myclassname = "progress-bar progress-bar-danger";
+               div(class='progress')
+                  div( class=myclassname role="progress-bar" aria-valuenow=objective_detail.mentallevel*25 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:" + objective_detail.mentallevel*25 + "%;")
+
+  
+             
+   
+  div(class='row')
+    div(class='col-md-5')
+      table(class='table table-bordered table-hover')
+       tr
+         td 
+           b Data
+          
+         td
+           b Browsing Type		   
+         
+         each data in objective_detail.data  
+      
+             -console.log ("data:" + data );
+             -var var0 = data.toString();
+             -var datatype = 'pie';	
+       
+             tr
+             
+              td
+                 p #{data}
+              td
+                
+                     
+                 
+                
+                //- Commentaire
+                 form(method='POST' action=objective_detail.url + '/view' target="_blank")
+                    
+                   input(class="form-control" type="text",name="fileid", value=var0)
+                   button.btn.btn-primary(type='submit') View
+
+              
+                -var mydata = objective_detail._id;
+                -var fileid = data.toString();
+                -console.log("datatype1:" + datatype1);
+                div.form-group
+                   
+                  select( id='datatype1_'+ fileid name='datatype11_' + fileid onchange="getDataView('" + mydata + "','" + fileid + "','" + 'datatype1_'+ fileid + "')")
+                    option(value='bar', selected= true) -- Select --
+                    option(value='bar') bar
+                    option(value='pie') pie
+                    option(value='line') line
+                //button(onclick="getDataView('" + mydata + "','" + fileid + "','" + this.id + "')", title="Edit")
+                  |Browse       
+
+   
+
+  
+  
+  div() 
+    //div(class="chart" style="width:100%;height:30%")
+    <div id="wrapper" style="position: relative; height: 50vh; width: 80vh">	
+     
+      canvas(id="chartPic" style="width:100%;height:100%" ) 	
+	
+  #div(class='col-md-1')
+           #button(onclick="getDataView('" + mydata + "')", title="Edit")|Edit
+             
+   
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
+  script(type="text/javascript" ) var myChart;
+  script. 
+    getColorCell = function( text ) {
+      return text;
+    }
+    getDataView = function( objectiveId, fileid, elt ) {
+        //alert ("getDataview objectiveId:" + objectiveId + " fileid:" + fileid );
+        var e = document.getElementById(elt);
+         
+        console.log("++++++elt:" + e);
+        var datatype = e.options[e.selectedIndex].value;
+        //console.log("++++++datatype:" + datatype);
+         
+        var params= {};
+        params.fileid =  fileid;
+        params.respmode = "base";
+        var data = JSON.stringify(params);
+        //var params = "fileid="+fileid;
+        const req = new XMLHttpRequest();
+        
+        //req.open('GET', 'http://www.mozilla.org/', true); 
+        req.open('POST', objectiveId + '/view', false); 
+        req.setRequestHeader( "Content-Type", "application/json"  );
+        req.send(data);
+
+        if (req.status === 200) {
+           console.log("Réponse reçue: %s", req.responseText);
+           draw( req.responseText, datatype );
+        } else {
+           console.log("Status de la réponse: %d (%s)", req.status, req.statusText);
+        }
+    }
+    draw = function( xxx, datatype ) {
+     
+     
+     var red="#FA123C", green="#06FD2B", blue="#4C06FD";
+      
+     var ctx = document.getElementById("chartPic").getContext('2d');
+     ctx.clearRect(0, 0, ctx.width, ctx.height);
+     var xxx = xxx.trim();
+
+     ctx.width = 200; 
+     ctx.height = 200;
+
+     ctx.canvas.width = 200; 
+     ctx.canvas.height = 200; 	 
+
+     //var obj = JSON.parse( '[{ "date":"d1", "value":"30"},{ "date":"d2", "value":"40"}]' );
+     
+     var obj = JSON.parse( xxx );
+     var objnames =[];
+     var objvalues =[];
+     var objbackgroundcolor=[];
+ 
+     for (var prop in obj) {
+        //alert( "==>" + obj[prop].date);
+        objnames.push( obj[prop].date );
+        objvalues.push( obj[prop].value );
+        objbackgroundcolor.push( "blue" );
+        
+        
+     }
+     //alert("coucou:" + objnames);
+      
+           if ( myChart){
+              myChart.destroy();
+           } 
+           myChart = new Chart(ctx,  {
+             type: datatype,
+             data: {
+                //labels: ["red", "green", "blue"],
+                labels: objnames,
+                datasets: [{
+                    label: 'Number of votes',
+                    //data: [1, 1, 1],
+                    data: objvalues,
+                    //backgroundColor: [red, green, blue],
+                    backgroundColor: objbackgroundcolor,
+                    //borderColor: [green, blue, red],
+                     
+                    borderWidth: 1
+                }],
+                },
+             options: {
+                title: { 
+                    display: true,
+                    text: "chart",
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                maintainAspectRatio: false
+            }
+        });
+        //chart.destroy();
+        //chart();
+
+    };			

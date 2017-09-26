@@ -1,0 +1,17 @@
+2017-09-26T16:06:47.029+0200 I CONTROL  [initandlisten] MongoDB starting : pid=174952 port=27017 dbpath=E:\nodeproject\marcproject\data\db 64-bit host=LW5-JPL-DSY
+2017-09-26T16:06:47.030+0200 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-09-26T16:06:47.030+0200 I CONTROL  [initandlisten] db version v3.4.6
+2017-09-26T16:06:47.030+0200 I CONTROL  [initandlisten] git version: c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5
+2017-09-26T16:06:47.031+0200 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-09-26T16:06:47.031+0200 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-09-26T16:06:47.031+0200 I CONTROL  [initandlisten] modules: none
+2017-09-26T16:06:47.031+0200 I CONTROL  [initandlisten] build environment:
+2017-09-26T16:06:47.031+0200 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-09-26T16:06:47.032+0200 I CONTROL  [initandlisten]     distarch: x86_64
+2017-09-26T16:06:47.032+0200 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-09-26T16:06:47.032+0200 I CONTROL  [initandlisten] options: { config: "C:\Program Files\MongoDB\Server\3.4\mongod.cfg", storage: { dbPath: "E:\nodeproject\marcproject\data\db" }, systemLog: { destination: "file", path: "E:\nodeproject\marcproject\data\log\mongod.log" } }
+2017-09-26T16:06:47.036+0200 I STORAGE  [initandlisten] exception in initAndListen: 98 Unable to create/open lock file: E:\nodeproject\marcproject\data\db\mongod.lock The process cannot access the file because it is being used by another process.. Is a mongod instance already running?, terminating
+2017-09-26T16:06:47.037+0200 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+2017-09-26T16:06:47.037+0200 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+2017-09-26T16:06:47.037+0200 I CONTROL  [initandlisten] now exiting
+2017-09-26T16:06:47.037+0200 I CONTROL  [initandlisten] shutting down with code:100

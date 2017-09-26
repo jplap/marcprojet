@@ -1,0 +1,12 @@
+extends athlete_layout_main_training
+
+
+block content
+  h1 #{title}
+
+
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

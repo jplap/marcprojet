@@ -1,0 +1,32 @@
+extends athlete_training_session_objective_list
+
+
+
+block append content
+  //- h1 Welcome to #[strong #{title}] main page.
+  h2 #{title1}  XX
+  
+  p #[strong titlel:] #{objective_detail.obj_title}
+  p #[strong detail:] #{objective_detail.obj_detail}
+  p #[strong status:] #{objective_detail.status}
+  //p #[strong create:] #{objective_detail.created_at}
+  //p #[strong update:] #{objective_detail.updated_at}
+  p #[strong begin:] #{objective_detail.date_of_begin}
+  p #[strong end:] #{objective_detail.date_of_end}
+  
+  //hr
+  //p
+    //a(href=objective_detail.url+'/delete') Delete Objective
+  
+  //p
+    //a(href=objective_detail.url+'/update') Update Objective
+  
+  div(class='col-md-1')
+      form(method='GET' action=objective_detail.url + '/delete' )
+         div.input
+            input(class="form-control" type="submit",name="timeInterval", value="Delete")
+  div(class='col-md-1')
+      form(method='GET' action=objective_detail.url + '/update' )
+         div.input
+            input(class="form-control" type="submit",name="timeInterval", value="Update")
+             

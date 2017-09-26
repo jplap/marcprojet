@@ -1,0 +1,35 @@
+2017-08-18T21:12:37.713+0200 I CONTROL  [initandlisten] MongoDB starting : pid=56472 port=27017 dbpath=E:\nodeproject\marcproject\data\db 64-bit host=LW5-JPL-DSY
+2017-08-18T21:12:37.714+0200 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-08-18T21:12:37.714+0200 I CONTROL  [initandlisten] db version v3.4.6
+2017-08-18T21:12:37.714+0200 I CONTROL  [initandlisten] git version: c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5
+2017-08-18T21:12:37.714+0200 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-08-18T21:12:37.715+0200 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-08-18T21:12:37.715+0200 I CONTROL  [initandlisten] modules: none
+2017-08-18T21:12:37.715+0200 I CONTROL  [initandlisten] build environment:
+2017-08-18T21:12:37.715+0200 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-08-18T21:12:37.716+0200 I CONTROL  [initandlisten]     distarch: x86_64
+2017-08-18T21:12:37.716+0200 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-08-18T21:12:37.716+0200 I CONTROL  [initandlisten] options: { config: "C:\Program Files\MongoDB\Server\3.4\mongod.cfg", storage: { dbPath: "E:\nodeproject\marcproject\data\db" }, systemLog: { destination: "file", path: "E:\nodeproject\marcproject\data\log\mongod.log" } }
+2017-08-18T21:12:37.726+0200 W -        [initandlisten] Detected unclean shutdown - E:\nodeproject\marcproject\data\db\mongod.lock is not empty.
+2017-08-18T21:12:37.735+0200 I -        [initandlisten] Detected data files in E:\nodeproject\marcproject\data\db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-08-18T21:12:37.735+0200 W STORAGE  [initandlisten] Recovering data from the last clean checkpoint.
+2017-08-18T21:12:37.736+0200 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7492M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-08-18T21:12:39.430+0200 I CONTROL  [initandlisten] 
+2017-08-18T21:12:39.430+0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-08-18T21:12:39.430+0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-08-18T21:12:39.430+0200 I CONTROL  [initandlisten] 
+2017-08-18T21:12:41.370+0200 W FTDC     [initandlisten] Failed to initialize Performance Counters for FTDC: WindowsPdhError: PdhExpandCounterPathW failed with 'The specified object was not found on the computer.' for counter '\Memory\Available Bytes'
+2017-08-18T21:12:41.370+0200 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'E:/nodeproject/marcproject/data/db/diagnostic.data'
+2017-08-18T21:12:41.382+0200 I NETWORK  [thread1] waiting for connections on port 27017
+2017-08-18T21:12:42.074+0200 I FTDC     [ftdc] Unclean full-time diagnostic data capture shutdown detected, found interim file, some metrics may have been lost. OK
+2017-08-18T21:12:42.120+0200 W FTDC     [ftdc] Uncaught exception in 'UnknownError: Caught std::exception of type class boost::filesystem::filesystem_error: boost::filesystem::file_size: The system cannot find the file specified: "E:\nodeproject\marcproject\data\db\diagnostic.data\metrics.interim.temp"' in full-time diagnostic data capture subsystem. Shutting down the full-time diagnostic data capture subsystem.
+2017-08-18T21:15:06.141+0200 I CONTROL  [thread2] Ctrl-C signal
+2017-08-18T21:15:06.141+0200 I CONTROL  [consoleTerminate] got CTRL_C_EVENT, will terminate after current cmd ends
+2017-08-18T21:15:06.141+0200 I NETWORK  [consoleTerminate] shutdown: going to close listening sockets...
+2017-08-18T21:15:06.141+0200 I NETWORK  [consoleTerminate] closing listening socket: 500
+2017-08-18T21:15:06.141+0200 I NETWORK  [consoleTerminate] shutdown: going to flush diaglog...
+2017-08-18T21:15:06.142+0200 I FTDC     [consoleTerminate] Shutting down full-time diagnostic data capture
+2017-08-18T21:15:06.142+0200 I STORAGE  [consoleTerminate] WiredTigerKVEngine shutting down
+2017-08-18T21:15:06.494+0200 I STORAGE  [consoleTerminate] shutdown: removing fs lock...
+2017-08-18T21:15:06.495+0200 I CONTROL  [consoleTerminate] now exiting
+2017-08-18T21:15:06.495+0200 I CONTROL  [consoleTerminate] shutting down with code:12

@@ -1,0 +1,18 @@
+extends athlete_layout_main_training
+
+
+
+block content
+  //- h1 Welcome to #[strong #{title}] main page.
+  h1 #{title1}: #{objective_detail.obj_title}
+  
+   
+  p Do you really want to delete this Objective?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#authorid.form-control(type='hidden',name='authorid', required='true', value=objective_detail._id )
+
+      button.btn.btn-primary(type='submit') Delete
+  
+  

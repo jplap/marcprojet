@@ -1,0 +1,33 @@
+extends athlete_layout_main_training_session
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2= title1
+  
+  ul
+  each session in session_list
+    li 
+      a(href=session.url) #{session.name} 
+      <input type='hidden' id='sessionid' value='  #{session.id} '  >
+       
+
+  else
+    li There are no session
+  
+  script.
+       
+      window.onload = function () {
+            
+               var sessionid = document.getElementById('sessionid').value;
+ 
+              var loc = window.location;
+              var withoutQuery = loc.hostname + loc.pathname;
+              var includingProtocol = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + loc.pathname;
+               console.log('includingProtocol:' + includingProtocol );
+              var urltarget = includingProtocol + '/../session/' +  sessionid.trim() + '/' + 'objectives';
+              console.log('urltarget:' + urltarget );
+              window.location.href= urltarget ;
+
+
+      }       

@@ -1,0 +1,6 @@
+2017-09-06T21:22:31.128+0200 I CONTROL  [thread1] CTRL_CLOSE_EVENT signal
+2017-09-06T21:22:31.128+0200 I CONTROL  [consoleTerminate] got CTRL_CLOSE_EVENT, will terminate after current cmd ends
+2017-09-06T21:22:31.129+0200 I NETWORK  [consoleTerminate] shutdown: going to close listening sockets...
+2017-09-06T21:22:31.129+0200 I NETWORK  [consoleTerminate] shutdown: going to flush diaglog...
+2017-09-06T21:22:31.129+0200 I CONTROL  [consoleTerminate] now exiting
+2017-09-06T21:22:31.129+0200 I CONTROL  [consoleTerminate] shutting down with code:12

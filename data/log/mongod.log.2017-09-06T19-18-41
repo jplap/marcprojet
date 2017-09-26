@@ -1,0 +1,6 @@
+2017-09-06T21:18:32.693+0200 I CONTROL  [thread1] Ctrl-C signal
+2017-09-06T21:18:32.694+0200 I CONTROL  [consoleTerminate] got CTRL_C_EVENT, will terminate after current cmd ends
+2017-09-06T21:18:32.695+0200 I NETWORK  [consoleTerminate] shutdown: going to close listening sockets...
+2017-09-06T21:18:32.695+0200 I NETWORK  [consoleTerminate] shutdown: going to flush diaglog...
+2017-09-06T21:18:32.695+0200 I CONTROL  [consoleTerminate] now exiting
+2017-09-06T21:18:32.695+0200 I CONTROL  [consoleTerminate] shutting down with code:12

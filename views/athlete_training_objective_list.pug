@@ -1,0 +1,44 @@
+extends athlete_layout_main_training
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2= title1
+  
+  div(class='row')
+    div(class='col-md-1')
+     form(method='POST' action='')
+       div.input
+          input(class="btn btn-primary" type="submit",name="type", value="all")
+    div(class='col-md-1')
+     form(method='POST' action='')
+       div.input
+          input(class="btn btn-primary" type="submit",name="type", value="inprogress")
+    div(class='col-md-1')
+     form(method='POST' action='')
+       div.input
+          input(class="btn btn-primary" type="submit",name="type", value="finished")
+  ul 
+  if objective_list
+      table(class='table table-bordered table-hover')
+       tr
+         td Title
+         td Detail
+         each objective in objective_list
+          tr
+            td 
+              a(href=objective.url) #{objective.obj_title}      
+                  
+            td #{objective.obj_detail}
+         
+         else
+            li There are no objective
+  else
+    li There are no objective
+
+  div(class='col-md-1')
+     form(method='GET' action='objectives/create')
+       div.input
+          input(class="btn btn-primary" type="submit" name="Operation" value="Create" )
+          
+  

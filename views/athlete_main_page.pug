@@ -1,0 +1,104 @@
+extends athlete_main_page_layout
+
+
+block content
+   
+  
+  h1 Welcome to #[strong #{title}] main page.
+
+   
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+  else
+    br
+    p #[strong My Profile]:
+
+    ul
+      li #[strong First name:] !{athlete.first_name} 
+      li #[strong Family name:] !{athlete.family_name}
+      li #[strong Birth date:] !{athlete.date_of_birth} 
+      
+      li #[strong Sessions:] !{athletesession_count} 
+      li #[strong Objectives:] !{athleteobjectif_count} 
+      li #[strong Training to close:] !{athleteobjectifinstance_count}
+
+    br 
+    
+    -var mydata = athlete._id;
+    -var fileid = athlete.photo;
+    div( ) 
+      //div(class="chart" style="width:100%;height:30%")
+      <div id="wrapper" style="position: relative; height: 15vh; width: 15vh">    
+     
+        img(id="myimg" src="*" style="width:100%;height:100%" )
+        <input type='hidden' id='athleteid' value=#{athlete._id}  >
+        <input type='hidden' id='athletephoto' value=#{athlete.photo}  >
+         
+
+    div(class='col-md-1')
+        button(onclick="getDataView1('" + mydata + "','" + fileid + "')", title="reLoad", style="display: none;")|reLoad
+
+
+    br 
+    div(class='row')
+     div(class='col-md-3')
+      div.form-group
+       form(method='POST' action='fileupload' enctype="multipart/form-data")
+        label(for='exampleInputFile') Modify the photo:
+        input(type='file', name='exampleInputFile' )
+        input(type='submit', name='imgName', value='Upload')
+      
+    br
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
+    script(type="text/javascript" ) var myChart;
+    script. 
+      window.onload = function () {
+           var mydata = document.getElementById('athleteid').value;
+           var fileid = document.getElementById('athletephoto').value;
+           getDataView1( mydata, fileid );
+      }      
+      
+      getDataView1 = function( objectiveId, fileid ) {
+        //alert ("getDataview1 objectiveId:" + objectiveId + " fileid:" + fileid );
+
+         
+        var params= {};
+        params.fileid =  fileid;
+         
+        var data = JSON.stringify(params);
+        
+        const req = new XMLHttpRequest();
+        
+        req.open('POST',  'view', false); 
+        req.setRequestHeader( "Content-Type", "application/json"  );
+
+        req.send(data);
+
+        if (req.status === 200) {
+           
+           var img=document.getElementById("myimg");
+           var myImg = new Image();
+           myImg.src = "data:image/png;base64," + req.responseText;
+           
+           
+           img.src = myImg.src;
+           img.style.display="";
+           
+           var imgSize = {
+                 w: img.width,
+                 h: img.height
+           };
+           //alert( imgSize.w +' '+ imgSize.h );
+
+           
+        } else {
+           console.log("Status de la réponse: %d (%s)", req.status, req.statusText);
+        }
+      }
+      
+
+  

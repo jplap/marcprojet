@@ -1,0 +1,22 @@
+extends athlete_layout_main_training
+
+block content
+  //- h1 #{title} Training Page
+  
+  h2 #{operation}
+  
+  form(method='POST' action='')
+   div(class='col-md-2')   
+    div.form-group
+      label(for='obj_title') Title:
+      input#obj_title.form-control(type='text', placeholder='Objective (objective 1) last' name='obj_title' required='true' value=(undefined===athlete ? '' : athlete.obj_title) )
+      label(for='obj_detail') Detail:
+      input#obj_detail.form-control(type='textarea', placeholder='Detail (running)' name='obj_detail' required='true' value=(undefined===athlete ? '' : athlete.obj_detail))
+    
+    button.btn.btn-primary(type='submit') Create
+
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

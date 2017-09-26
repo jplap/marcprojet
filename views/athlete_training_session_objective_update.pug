@@ -1,0 +1,102 @@
+extends athlete_layout_main_training_session
+
+
+
+block content
+  //- h1 Welcome to #[strong #{title}] main page.
+  h1 #{title1}: #{objective_detail.obj_title}
+ 
+  
+  div(class='row')
+
+    - var ii = 0;
+    for data in objective_detail.data
+        //li= data
+        - ii++;
+    
+    label(for='FileDataNumber') File Data Number:  
+    p #{ii}
+    form(method='POST' action='fileupload' enctype="multipart/form-data")
+        div(class='col-md-0')
+        label(for='trainingdata') Training Data Upload:
+          p
+          input(type='file', name='imageupload')
+          input(type='submit', name='imgName', value='upload')
+    
+    p
+    form(method='POST' action='')
+     div(class='col-md-2')
+      div.form-group
+      label(for='status') Status:
+      select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
+        option(value='In Progress') In Progress
+        option(value='Finished') Finished
+      
+      div.form-group
+      label(for='scoretraining') Training Score:
+      input#scoretraining.form-control(type='number' min="0" max="5" name='scoretraining' value=objective_detail.scoretraining)
+      
+      div.form-group
+      label(for='scoretrainer') Trainer Score:
+      input#scoretrainer.form-control(type='number' min="0" max="5" name='scoretrainer' value=objective_detail.scoretrainer)
+      //select(type='select' min="0" max="5" name='scoretrainer')
+          //option(value='2', selected= true) -- Select --
+          //option(value='4') tres bon
+          //option(value='3') bon
+          //option(value='2') moyen 
+          //option(value='1') mauvais 
+          //option(value='0') tres mauvais  
+       
+      //p #{objective_detail.physicallevelbefore} 
+      div.form-group
+      label(for='physicallevelbefore') Physical Level Before:
+      input#physicallevelbefore.form-control(type='number' min="0" max="5" name='physicallevelbefore' value=objective_detail.physicallevelbefore  )
+      //select(type='number' min="0" max="5" name='physicallevelbefore')
+          //option(value='2', selected= true) -- Select --
+          //option(value='4') tres bon
+          //option(value='3') bon
+          //option(value='2') moyen 
+          //option(value='1') mauvais 
+          //option(value='0') tres mauvais
+       
+      div.form-group
+      label(for='physicallevelafter') Physical Level After:
+      input#physicallevelafter.form-control(type='number' min="0" max="5" name='physicallevelafter' value=objective_detail.physicallevelafter  )
+      //select(type='number' min="0" max="5" name='physicallevelafter')
+          option(value='2', selected= true) -- Select --
+          option(value='4') tres bon
+          option(value='3') bon
+          option(value='2') moyen 
+          option(value='1') mauvais 
+          option(value='0') tres mauvais
+     
+      div.form-group
+      label(for='technicallevel') Technical Level:
+      input#technicallevel.form-control(type='number' min="0" max="5" name='technicallevel' value=objective_detail.technicallevel  )
+      //select(type='number' min="0" max="5" name='technicallevel')
+          option(value='2', selected= true) -- Select --
+          option(value='4') tres bon
+          option(value='3') bon
+          option(value='2') moyen 
+          option(value='1') mauvais 
+          option(value='0') tres mauvais    
+          
+      div.form-group
+      label(for='mentallevel') Mental Level:
+      input#mentallevel.form-control(type='number' min="0" max="5" name='mentallevel' value=objective_detail.mentallevel  )
+      //select(type='number' min="0" max="5" name='mentallevel')
+          option(value='2', selected= true) -- Select --
+          option(value='4') tres bon
+          option(value='3') bon
+          option(value='2') moyen 
+          option(value='1') mauvais 
+          option(value='0') tres mauvais    
+      
+      
+        
+         
+    
+      p
+      button.btn.btn-primary(type='submit') Update
+  
+  

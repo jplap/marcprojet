@@ -1,0 +1,24 @@
+extends athlete_layout_main_training
+
+
+block content
+   
+  
+  h1 Welcome to #[strong #{title}] main page.
+
+   
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+  else
+    p The library has the following record counts:
+
+    ul
+      
+      li #[strong Objectives:] !{data.athleteobjectif_count} 
+
+
+
+  

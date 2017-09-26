@@ -1,0 +1,20 @@
+extends athlete_layout
+
+block content
+  h1 #{title}
+  
+  form(method='POST' action='')
+   div(class='col-md-2')
+    div.form-group
+      label(for='first_name') First Name:
+      input#first_name.form-control(type='text', placeholder='First name (Christian) last' name='first_name' required='true' value=(undefined===athlete ? '' : athlete.first_name) )
+      label(for='family_name') Family Name:
+      input#family_name.form-control(type='text', placeholder='Family name (surname)' name='family_name' required='true' value=(undefined===athlete ? '' : athlete.family_name))
+    
+    button.btn.btn-primary(type='submit') Submit
+
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

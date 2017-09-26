@@ -1,0 +1,17 @@
+2017-07-18T13:28:21.009+0200 I CONTROL  [initandlisten] MongoDB starting : pid=19676 port=27017 dbpath=E:\nodeproject\marcproject\data\db	 64-bit host=LW5-JPL-DSY
+2017-07-18T13:28:21.012+0200 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-07-18T13:28:21.012+0200 I CONTROL  [initandlisten] db version v3.4.6
+2017-07-18T13:28:21.012+0200 I CONTROL  [initandlisten] git version: c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5
+2017-07-18T13:28:21.012+0200 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten] modules: none
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten] build environment:
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten]     distarch: x86_64
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-07-18T13:28:21.013+0200 I CONTROL  [initandlisten] options: { config: "C:\Program Files\MongoDB\Server\3.4\mongod.cfg", storage: { dbPath: "E:\nodeproject\marcproject\data\db	" }, systemLog: { destination: "file", path: "E:\nodeproject\marcproject\data\log\mongod.log" } }
+2017-07-18T13:28:21.014+0200 I STORAGE  [initandlisten] exception in initAndListen: 29 Data directory E:\nodeproject\marcproject\data\db	 not found., terminating
+2017-07-18T13:28:21.014+0200 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+2017-07-18T13:28:21.014+0200 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+2017-07-18T13:28:21.015+0200 I CONTROL  [initandlisten] now exiting
+2017-07-18T13:28:21.015+0200 I CONTROL  [initandlisten] shutting down with code:100

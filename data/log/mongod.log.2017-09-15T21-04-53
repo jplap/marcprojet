@@ -1,0 +1,37 @@
+2017-09-11T22:37:45.874+0200 I CONTROL  [initandlisten] MongoDB starting : pid=21136 port=27017 dbpath=E:\nodeproject\marcproject\data\db 64-bit host=LW5-JPL-DSY
+2017-09-11T22:37:45.875+0200 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-09-11T22:37:45.875+0200 I CONTROL  [initandlisten] db version v3.4.6
+2017-09-11T22:37:45.875+0200 I CONTROL  [initandlisten] git version: c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5
+2017-09-11T22:37:45.876+0200 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-09-11T22:37:45.876+0200 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-09-11T22:37:45.876+0200 I CONTROL  [initandlisten] modules: none
+2017-09-11T22:37:45.876+0200 I CONTROL  [initandlisten] build environment:
+2017-09-11T22:37:45.877+0200 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-09-11T22:37:45.877+0200 I CONTROL  [initandlisten]     distarch: x86_64
+2017-09-11T22:37:45.877+0200 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-09-11T22:37:45.877+0200 I CONTROL  [initandlisten] options: { config: "C:\Program Files\MongoDB\Server\3.4\mongod.cfg", storage: { dbPath: "E:\nodeproject\marcproject\data\db" }, systemLog: { destination: "file", path: "E:\nodeproject\marcproject\data\log\mongod.log" } }
+2017-09-11T22:37:45.937+0200 W -        [initandlisten] Detected unclean shutdown - E:\nodeproject\marcproject\data\db\mongod.lock is not empty.
+2017-09-11T22:37:45.944+0200 I -        [initandlisten] Detected data files in E:\nodeproject\marcproject\data\db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2017-09-11T22:37:45.945+0200 W STORAGE  [initandlisten] Recovering data from the last clean checkpoint.
+2017-09-11T22:37:45.946+0200 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7492M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-09-11T22:37:47.949+0200 I CONTROL  [initandlisten] 
+2017-09-11T22:37:47.949+0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2017-09-11T22:37:47.949+0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2017-09-11T22:37:47.949+0200 I CONTROL  [initandlisten] 
+2017-09-11T22:37:50.195+0200 W FTDC     [initandlisten] Failed to initialize Performance Counters for FTDC: WindowsPdhError: PdhExpandCounterPathW failed with 'The specified object was not found on the computer.' for counter '\Memory\Available Bytes'
+2017-09-11T22:37:50.195+0200 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'E:/nodeproject/marcproject/data/db/diagnostic.data'
+2017-09-11T22:37:50.206+0200 I NETWORK  [thread1] waiting for connections on port 27017
+2017-09-11T22:39:37.382+0200 I NETWORK  [thread1] connection accepted from 127.0.0.1:50483 #1 (1 connection now open)
+2017-09-11T22:39:37.402+0200 I NETWORK  [conn1] received client metadata from 127.0.0.1:50483 conn1: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "6.1.7601" }, platform: "Node.js v6.11.1, LE, mongodb-core: 2.1.11" }
+2017-09-11T22:39:41.581+0200 I NETWORK  [thread1] connection accepted from 127.0.0.1:50491 #2 (2 connections now open)
+2017-09-11T22:40:06.851+0200 I NETWORK  [thread1] connection accepted from 127.0.0.1:50585 #3 (3 connections now open)
+2017-09-11T22:41:29.236+0200 I COMMAND  [conn2] command MarcDB.objectiveinstances command: find { find: "objectiveinstances", filter: { _id: ObjectId('599ac5ebc7e41e07edf5e2d6') }, projection: {}, limit: 1, singleBatch: true, batchSize: 1 } planSummary: IDHACK keysExamined:1 docsExamined:1 cursorExhausted:1 numYields:0 nreturned:1 reslen:415 locks:{ Global: { acquireCount: { r: 2 } }, Database: { acquireCount: { r: 1 } }, Collection: { acquireCount: { r: 1 } } } protocol:op_query 111ms
+2017-09-12T00:08:36.708+0200 I -        [conn2] end connection 127.0.0.1:50491 (3 connections now open)
+2017-09-12T00:08:36.709+0200 I -        [conn3] end connection 127.0.0.1:50585 (2 connections now open)
+2017-09-12T00:08:36.709+0200 I -        [conn1] end connection 127.0.0.1:50483 (2 connections now open)
+2017-09-12T00:15:22.680+0200 I NETWORK  [thread1] connection accepted from 127.0.0.1:56638 #4 (1 connection now open)
+2017-09-12T00:15:22.700+0200 I NETWORK  [conn4] received client metadata from 127.0.0.1:56638 conn4: { driver: { name: "nodejs", version: "2.2.27" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "6.1.7601" }, platform: "Node.js v6.11.1, LE, mongodb-core: 2.1.11" }
+2017-09-12T00:17:39.456+0200 I NETWORK  [thread1] connection accepted from 127.0.0.1:57115 #5 (2 connections now open)
+2017-09-12T10:16:26.552+0200 I -        [conn5] end connection 127.0.0.1:57115 (2 connections now open)
+2017-09-12T11:06:46.730+0200 I -        [conn4] end connection 127.0.0.1:56638 (1 connection now open)
+2017-09-12T11:27:40.001+0200 I COMMAND  [ftdc] serverStatus was very slow: { after basic: 0, after asserts: 0, after backgroundFlushing: 0, after connections: 0, after dur: 0, after extra_info: 0, after globalLock: 0, after locks: 0, after network: 0, after opLatencies: 0, after opcounters: 0, after opcountersRepl: 0, after repl: 0, after security: 0, after storageEngine: 0, after tcmalloc: 0, after wiredTiger: 24078, at end: 24078 }

@@ -1,0 +1,42 @@
+extends athlete_layout_main_training_session
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2= title1
+  br
+  form(method='POST' action='')
+    div(class='col-md-2')
+     div.form-group
+      label(for='objective') Objective:
+      select#objective.form-control(type='select', placeholder='Select objective' name='objective' required='true' )
+        for objective in objectives
+          if book
+            option(value=objective._id selected=(objective._id.toString()==book.objective ? 'selected' : false) ) #{objective.obj_title}
+          else
+            option(
+			   value=(objective.id)
+			) #{objective.obj_title}
+
+    
+     div.form-group
+      label(for='date_of_begin') Start time:
+      input#date_of_begin.form-control(type='datetime-local', name='date_of_begin', value=(undefined===begin ? '' : session.date_of_begin) )
+      //input#hour_of_begin.form-control(type='time', name='hour_of_begin', value=(undefined===begin ? '' : session.hour_of_begin) )
+     //div.form-group
+     //  label(for='hour_of_begin') Begin hour:
+      
+     div.form-group
+      label(for='date_of_end') End time:
+      input#date_of_end.form-control(type='datetime-local', name='date_of_end', value=(undefined===begin ? '' : session.date_of_end) ) 
+      //label(for='hour_of_end') End hour:
+      //input#hour_of_end.form-control(type='time', name='hour_of_end', value=(undefined===begin ? '' : session.hour_of_end) )  
+    br
+    div(class='row')
+    div(class='col-md-1')
+    button.btn.btn-primary(type='submit') Submit
+    
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

@@ -1,0 +1,24 @@
+extends athlete_layout_main_training
+
+
+
+block content
+  //- h1 Welcome to #[strong #{title}] main page.
+  h1 #{title1}: #{objective_detail.obj_title}
+  
+  
+        
+
+
+  p Do you really want to Update this Objective?
+    
+    form(method='POST' action='')
+      div.form-group
+      label(for='status') Status:
+      select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
+        option(value='In Progress') In Progress
+        option(value='Finished') Finished
+
+      button.btn.btn-primary(type='submit') Update
+  
+  
