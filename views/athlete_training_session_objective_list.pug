@@ -179,6 +179,7 @@ block content
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
   script(src='//cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js')
+ 
   
   
    script(type="text/javascript" ) var myChart;
@@ -191,7 +192,7 @@ block content
      
       window.onload = function () {
             
-           
+           fatherOnLoad();
            
            $("table").hide();
            
@@ -369,59 +370,51 @@ block content
       }
       createTable = function ( data ){
                 var dataSet = JSON.parse( data );
-                                
-                $('#tblistbis').DataTable( {
-                    data: dataSet,
-                    "order": [[ 3, "desc" ]],
-                    columns: [
-                        { title: "Objective" },
-                        { title: "Begin" },
-                        { title: "End" },
-                        { title: "Status" }
-                        
-                    ],
-                    "createdRow": function( row, data, dataIndex ) {
-                        if ( data[3] == "In Progress" && new Date(data[2]).getTime()  < Date.now() ) {
-                          $('td', row).css('background-color', 'Red');
-                        }else if ( data[3] == "Finished" && new Date(data[2]).getTime()  < Date.now() ) {
-                          $('td', row).css('background-color', 'Green'); 
-                        }else{
-                          $('td', row).css('background-color', 'Blue'); 
+                   
+                if ( dataSet.length > 0 ){
+                    $('#tblistbis').DataTable( {
+                        data: dataSet,
+                        "order": [[ 3, "desc" ]],
+                        columns: [
+                            { title: "Objective" },
+                            { title: "Begin" },
+                            { title: "End" },
+                            { title: "Status" }
+                            
+                        ],
+                        "createdRow": function( row, data, dataIndex ) {
+                            if ( data[3] == "In Progress" && new Date(data[2]).getTime()  < Date.now() ) {
+                              $('td', row).css('background-color', 'Red');
+                            }else if ( data[3] == "Finished" && new Date(data[2]).getTime()  < Date.now() ) {
+                              $('td', row).css('background-color', 'Green'); 
+                            }else{
+                              $('td', row).css('background-color', 'Blue'); 
+                            }
                         }
-                    }
-                } );
-                
-                var table = $('#tblistbis').DataTable();
-                
-                
-                $('#tblistbis tbody').on( 'click', 'tr', function () {
-                    console.log( "click" );
-                    //table.row('.selected');
-                    var tab = table.row(this).data();
+                    } );
+                    
+                    var table = $('#tblistbis').DataTable();
                     
                     
-                    
-                    var loc = window.location;
-                    var withoutQuery = loc.hostname + loc.pathname;
-                    var includingProtocol = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-                    console.log('includingProtocol:' + includingProtocol );
-                    var urltarget = includingProtocol + tab[4];
-                    console.log('urltarget:' + urltarget );
-                    window.location.href= urltarget ;
-                 
-                } );
+                    $('#tblistbis tbody').on( 'click', 'tr', function () {
+                        console.log( "click" );
+                        //table.row('.selected');
+                        var tab = table.row(this).data();
+                        
+                        
+                        
+                        var loc = window.location;
+                        var withoutQuery = loc.hostname + loc.pathname;
+                        var includingProtocol = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+                        console.log('includingProtocol:' + includingProtocol );
+                        var urltarget = includingProtocol + tab[4];
+                        console.log('urltarget:' + urltarget );
+                        window.location.href= urltarget ;
+                     
+                    } );
+                }
                 
-                /*
-            var table = document.getElementById("tblist");
-            var row = table.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            cell1.innerHTML = "NEW CELL1";
-            cell2.innerHTML = "NEW CELL2";
-            */
+           
       
       }
           

@@ -376,6 +376,7 @@ exports.athlete_objective_list_get = function(req, res, next) {
     
 };
 
+
 exports.athlete_objective_list_post = function(req, res, next) {
   console.log("controller objective_list_post athleteid:" + req.params.athleteid);
   objectiveList ( req, res, next );

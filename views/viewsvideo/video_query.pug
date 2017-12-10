@@ -1,0 +1,97 @@
+extends ../athlete_layout_main_training_session.pug
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2= title1
+  br
+  
+  -var currentathlete = athleteId;
+  -console.log("currentathleteId:" + currentathlete);
+  <input type='hidden' id='currentathleteId' value='  #{currentathlete} '  >
+  
+            
+  
+  div(class='row')
+    div(class='col-sm-3')
+        h3= "Current Tags"
+        <div id="taggerArea" class="input textarea clearfix example1" ></div>
+       
+          // Pour le tagger      
+          <p id="tagger-event"></p>
+  
+   
+          div(class='row')
+
+              
+            div(class='col-sm-1' )
+                <form class="demoForm" id="transForm"> 
+                    <label class="radio-inline"> 
+                      <input type="radio" name="trans" value="inter" checked/>Intersection</label>
+                    <label class="radio-inline">   
+                      <input type="radio" name="trans" value="union"/>Union</label>
+
+            div(class='col-sm-1 col-sm-offset-5')
+              button( id="reloadTagsId" onclick="reloadTags()") refresh
+            //div(class='col-sm-1 col-sm-offset-1')    
+                //button( id="opIntersectionId" onclick="executeOperation('" + currentathlete + "')") intersect
+
+    div(class='col-sm-3')
+        h3= "Tags Reserved"
+        <div id="taggerAreaReserved" class="input textarea clearfix example1" ></div>
+       
+          // Pour le tagger      
+          <p id="taggerReserved-event"></p>                
+                
+  div(class='row')
+    <br>  
+  div(class='row')
+  
+    
+      // Tager courant
+      -var myTags = allowedTags;        
+      <input type='hidden' id='tagsId' value='  #{myTags} '  >
+
+      div(class='col-sm-6')
+        // Liste de videos
+        h3= "Result"
+        table(class='table table-bordered table-hover', id='listvideosId', /*style="display:none;",*/ cellspacing="0")
+       
+  
+  script(src="../../../../../../../node_modules/taggle/src/taggle.js")
+  script(src="../../../../../../../node_modules/moment/moment.js")
+  <link href="../../../../../../../node_modules/taggle/example/css/taggle.css" rel="stylesheet" type="text/css"/>
+  <link href="../../../../../../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+   
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  //<link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+  
+  
+  //<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"/>
+
+
+  //<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css"/>
+  //<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+
+
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+  script(src='//cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js')
+  
+  
+  
+  
+   script(type="text/javascript" ) var myChart;
+
+   script(src="/viewsjavascripts/videoQuery.js")
+
+   //script.
+
+      

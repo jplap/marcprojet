@@ -1,0 +1,231 @@
+extends athlete_layout_main_training_session
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2= title1
+   
+  
+    
+  -var waitingCloseMode = 1
+   
+   
+   
+  div(class='row')
+    div(class='col-md-11')
+        <div id="visualization"></div>    
+
+  <br>  
+   
+  <br>  
+  
+  div(class='row')  
+     
+   if objectiveIntance_list
+       
+      
+       
+      table(class='table table-bordered table-hover', id='tblistbis', style="display:none;", cellspacing="0")
+      table(class='table table-bordered table-hover', id='tblist', style="display:none;")
+       
+       //-Commentaire block suivant
+           tr
+             td Objective
+             td Begin
+             td End
+             td Term
+             
+             td Status
+             each objectiveIntance in objectiveIntance_list
+                
+                      //if waitingCloseMode == 1 &&  objectiveIntance.status == 'Finished' || new Date(objectiveIntance.date_of_end).getTime()  > Date.now() 
+                      //else
+                      tr
+                        td 
+                          a(href=objectiveIntance.url) #{objectiveIntance.obj_title}
+                          
+                        
+                          td #{moment(objectiveIntance.date_of_begin).format('DD dddd hh:mm')}          
+                        
+                        
+                        
+                          td #{moment(objectiveIntance.date_of_end).format('DD dddd hh:mm')}          
+                         
+                          td #{moment(objectiveIntance.date_of_end).format('LL')}
+                        
+                        - begin = objectiveIntance.date_of_begin
+                        - end = objectiveIntance.date_of_end
+                        //- diff = moment(end).unix() - moment(start).unix();
+                        - diff = moment(end) - moment(start);
+                        //- moment.duration(diff).format('hh:mm:ss')  
+                        td #{moment(diff).format('hh:mm')}
+                        //td #{objectiveIntance.obj_title} a(href=objectiveIntance.url)
+                        
+                        //if objectiveIntance.status == 'Finished'
+                        if  objectiveIntance.status == "In Progress" && new Date(objectiveIntance.date_of_end).getTime()  < Date.now() 
+                          <td  objectiveIntance.status align=right, bgcolor=red> #{objectiveIntance.status}
+                        else if  objectiveIntance.status == "Finished" && new Date(objectiveIntance.date_of_end).getTime()  < Date.now() 
+                          <td  objectiveIntance.status align=right, bgcolor=green> #{objectiveIntance.status}  
+                        else
+                          //td #{objectiveIntance.status}
+                          <td  objectiveIntance.status align=right, bgcolor=blue> #{objectiveIntance.status}
+               
+               
+               
+             else
+                li There are no objective
+                
+        
+      -var mydata = []; 
+       
+      -var mytab = [];
+       
+      each objectiveIntance in objectiveIntance_list
+           
+              
+              -var rec = {};
+              -rec.urlobjective = objectiveIntance.url;
+              -rec.date_of_begin = objectiveIntance.date_of_begin;
+              -rec.date_of_end = objectiveIntance.date_of_end;
+              -rec.obj_title = objectiveIntance.obj_title;
+              -rec.status = objectiveIntance.status;
+              -console.log("rec1:" + rec.urlobjective);
+              -mydata.push ( rec );  
+              -console.log("mydata:" + JSON.stringify(mydata));
+             
+            
+             
+            
+              - begin = objectiveIntance.date_of_begin
+              - end = objectiveIntance.date_of_end
+             
+              - diff = moment(end) - moment(start);
+              
+              -tab = [];
+              -tab.push( objectiveIntance.obj_title );
+              -tab.push( objectiveIntance.date_of_begin );
+              -tab.push( objectiveIntance.date_of_end );
+              //-tab.push( '"' + diff + '"' );
+              -tab.push( objectiveIntance.status );
+              -elt = objectiveIntance.url;
+              -tab.push( elt );
+              -mytab.push( tab );
+            
+      -var mydata1 = JSON.stringify(mydata);        
+      <input type='hidden' id='objectiveListInputId' value='  #{mydata1} '  >
+     
+      -var mytab1 = JSON.stringify(mytab);        
+      <input type='hidden' id='objectiveTab' value='  #{mytab1} '  >
+      -console.log("FIN mydata:" + JSON.stringify(mydata));      
+   else
+    li There are no objective
+  
+  
+
+  
+  script(src="../../../../../../../node_modules/vis/dist/vis.js")
+  script(src="../../../../../../../node_modules/moment/moment.js")
+  script(src="http://code.jquery.com/jquery-1.11.1.min.js")
+   
+  <link href="../../../../../../../node_modules/vis/dist/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/stylesheets/timeline.css" rel="stylesheet" type="text/css"/>
+  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"  type="text/css"/>
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+  script(src='//cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js')
+ 
+  
+  
+   script(type="text/javascript" ) var myChart;
+   script.
+      $(document).ready( function() {
+         //$('#tblist').DataTable();
+         //console.log(myChart);
+         
+      });
+     
+      window.onload = function () {
+            
+           fatherOnLoad();
+           
+           $("table").hide();
+           
+           var objectiveTab = document.getElementById('objectiveTab').value;
+           createTable( objectiveTab );    
+            
+           var objectiveList = document.getElementById('objectiveListInputId').value;
+           
+           
+            
+           $("table").show();
+             
+            
+           
+             
+           
+      }   
+      getClickFct = function( cb ) {
+        console.log ( "cb cb:"+ cb.checked );
+        //var tblist = document.getElementById('tblist');
+        //$('#tblist').DataTable();
+        if ( cb.checked == true ){
+            $("table").show();
+        }else{
+            $("table").hide();
+        }
+      }      
+      
+
+      createTable = function ( data ){
+                var dataSet = JSON.parse( data );
+                   
+                if ( dataSet.length > 0 ){
+                    $('#tblistbis').DataTable( {
+                        data: dataSet,
+                        "order": [[ 3, "desc" ]],
+                        columns: [
+                            { title: "Objective" },
+                            { title: "Begin" },
+                            { title: "End" },
+                            { title: "Status" }
+                            
+                        ],
+                        "createdRow": function( row, data, dataIndex ) {
+                            if ( data[3] == "In Progress" && new Date(data[2]).getTime()  < Date.now() ) {
+                              $('td', row).css('background-color', 'Red');
+                            }else if ( data[3] == "Finished" && new Date(data[2]).getTime()  < Date.now() ) {
+                              $('td', row).css('background-color', 'Green'); 
+                            }else{
+                              $('td', row).css('background-color', 'Blue'); 
+                            }
+                        }
+                    } );
+                    
+                    var table = $('#tblistbis').DataTable();
+                    
+                    
+                    $('#tblistbis tbody').on( 'click', 'tr', function () {
+                        console.log( "click" );
+                        //table.row('.selected');
+                        var tab = table.row(this).data();
+                        
+                        
+                        
+                        var loc = window.location;
+                        var withoutQuery = loc.hostname + loc.pathname;
+                        var includingProtocol = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+                        console.log('includingProtocol:' + includingProtocol );
+                        var urltarget = includingProtocol + tab[4];
+                        console.log('urltarget:' + urltarget );
+                        window.location.href= urltarget ;
+                     
+                    } );
+                }
+                
+           
+      
+      }
+          
+    
+      
+

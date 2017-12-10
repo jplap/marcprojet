@@ -1,3 +1,4 @@
+var https = require('https');  
 var express = require('express')
 var logger = require('morgan'); // Charge le middleware de logging
 var fs = require('fs')
@@ -6,20 +7,31 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var session = require('express-session');
+var cors = require('cors')
 
  
 
 var index = require('./routes/index');
+var options = {  
+  key: fs.readFileSync('hostkey.pem'),  
+  cert: fs.readFileSync('hostcert.pem')  
+};  
 //var users = require('./routes/users');
 var catalog = require('./routes/catalog');  //Import routes for "catalog" area of site
 var athletesessionroutes = require('./routes/athleteSessionRoutes');   
+var persistenceroutes = require('./routes/persistenceRoutes');   
+var videoroutes = require('./routes/videoRoutes');
+var pubsubroutes = require('./routes/pubsubRoutes');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 
 
-var app = express()
+var app = express();
+app.use(cors({
+  credentials: true,
+}));
 
 
 
@@ -29,6 +41,10 @@ mongoose.connect(mongoDB);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('db', db);
+
+
+
+
 
  
 
@@ -63,8 +79,23 @@ app.use(function (req, res, next) {
 
 */
 
+var redis = require('redis');
+var clientRedis = redis.createClient(); //creates a new client
+
+clientRedis.on('connect', function() {
+    console.log('clientRedis Client connected');
+});
+app.set('clientRedis', clientRedis );
+
+
+
+var RedisTagging = require("redis-tagging");
+var redisTagging = new RedisTagging({host: "127.0.0.1", port: 6379, nsprefix: "rt"} );
+app.set('redisTagging', redisTagging );
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'views/viewsvideo'), path.join(__dirname, 'views/viewspubsub')]);
+
 app.set('view engine', 'pug');
 
 
@@ -89,12 +120,27 @@ app.use(expressValidator()); // Add this after the bodyParser middlewares!
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+app.use("/viewsjavascripts", express.static("./viewsjavascripts"));
+
+
 // include routes
 app.use('/', index);
 //app.use('/users', users);
 app.use('/catalog', catalog);  // Add catalog routes to middleware chain.
 app.use('/catalog', athletesessionroutes);  // Add catalog routes to middleware chain.
+app.use('/persistency', persistenceroutes);  // Add catalog routes to middleware chain.
 
+app.use('/persistency', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.use('/video', videoroutes);  // Add catalog routes to middleware chain.
+
+app.use('/pubsub', pubsubroutes);  // Add catalog routes to middleware chain.
+
+
+ 
  
 
 // catch 404 and forward to error handler
@@ -127,7 +173,31 @@ app.get('/', function (req, res) {
 
 
 
-
+/*
 app.listen(8082, function () {
   console.log('Example app listening on port 8082!')
+  //require('./document')(app._router.stack, 'app');
 })
+*/
+
+var httpsServer = https.createServer(options, app);
+
+ 
+httpsServer.listen(80,'0.0.0.0', function () {
+  console.log('Server app https listening on port 8082!')
+  
+})
+
+var io = require('socket.io')(httpsServer);
+var redis = require('socket.io-redis');
+io.adapter(redis({ host: '127.0.0.1', port: 6379 }));
+
+io.sockets.on('connection', function(socket) {
+    console.log("socket io connection");
+    socket.on('message', function(data) {
+        console.log("socket io on");
+        socket.broadcast.emit('message', data);
+    });
+
+});
+app.set('io', io );

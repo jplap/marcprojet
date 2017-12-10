@@ -1,0 +1,56 @@
+extends ../athlete_layout_main_training_session.pug
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2  title1
+  br
+  
+  -var mydata = athleteId;
+  -console.log("mydata:" + mydata);
+  form(name="myForm" onsubmit="return validateForm('" + mydata + "')")
+  
+      h3= "title"        
+      div(class='row')
+        div(class='col-md-6')
+            <input id="videotittle" class="form-control" type="text" name="videoName" value="" "><br>
+
+
+
+      h3= "url"        
+      div(class='row')
+        div(class='col-md-6')
+            <input id="videourl" class="form-control" type="text" name="videoUrl" value="" ><br>
+      
+      h3= "tag"
+      div(class='row')
+        div(class='col-md-6')
+            <div id="taggerArea" class="input textarea clearfix example1" ></div>
+            
+
+      
+            
+            
+      <p id="example5-event"></p>
+      
+       
+      input(class="btn btn-primary" type="submit", value="Submit")
+      
+      -var myTags = allowedTags;        
+      <input type='hidden' id='tagsId' value='  #{myTags} '  >
+  
+  script(src="../../../../../../../node_modules/taggle/src/taggle.js")
+  script(src="../../../../../../../node_modules/moment/moment.js")
+   
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+  <link href="../../../../../../../node_modules/taggle/example/css/taggle.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  
+   script(type="text/javascript" ) var myChart;
+
+   script(src="/viewsjavascripts/videoAdd.js")
+   //script.

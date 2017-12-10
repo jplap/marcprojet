@@ -15,6 +15,8 @@ router.get('/training/athlete/:athleteid/session/:sessionid', training_session_c
 // liste des objectifs d'une session 
 router.get('/training/athlete/:athleteid/session/:sessionid/objectives', training_session_controller.session_objective_list);
 router.post('/training/athlete/:athleteid/session/:sessionid/objectives', training_session_controller.session_objective_list);
+router.get('/training/athlete/:athleteid/session/:sessionid/objectives/waiting', training_session_controller.session_objective_waiting_list);
+router.get('/training/athlete/:athleteid/objectives/waiting', training_session_controller.session_objective_waiting_list);
 
 
 
@@ -31,7 +33,10 @@ router.post('/training/athlete/:athleteid/session/:sessionid/objective/:objectiv
 // delete d'un objectif
 router.get('/training/athlete/:athleteid/session/:sessionid/objective/:objectiveid/delete', training_session_controller.session_objective_delete_get);
 router.post('/training/athlete/:athleteid/session/:sessionid/objective/:objectiveid/delete', training_session_controller.session_objective_delete_post);
+
+
  
+
 
 
 

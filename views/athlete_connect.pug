@@ -1,10 +1,11 @@
 extends athlete_layout
 
 block content
-  h1 #{title}
+  h2 #{title}
+  br
   
   form(method='POST' action='')
-   div(class='col-md-2')
+   div(class='col-md-4')
     div.form-group
       label(for='first_name') First Name:
       input#first_name.form-control(type='text', placeholder='First name (Christian) last' name='first_name' required='true' value=(undefined===athlete ? '' : athlete.first_name) )

@@ -7,70 +7,154 @@ html(lang='en')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/char.css')
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/char.css')
+    //<link href="../../../../../../../menudrop/stylesheets/menu.css" rel="stylesheet" type="text/css"/>
+    //<link href="../../../../../../../stylesheets/skelete.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../../../../../menudrop/nav-menu/menu/style.css" rel="stylesheet" type="text/css"/>
+    //<link href="../../../../../../../stylesheets/skelete.css" rel="stylesheet" type="text/css"/>
+    
+     
   body
     div(class='container-fluid')
-      div(class='row')
-        div(class='col-sm-2')
-        
-        div(class='col-sm-4')
-        div(class='col-sm-3')
-        div(class='col-sm-1' align="right")
-           a(href='/catalog/training/athlete/' + athleteId + '/disconnect') disconnect
-        div(class='col-sm-1' align="right")
-            p #{title}
-            
-        div(class='col-sm-1')
-            
-            <div id="wrapper" style="position: relative; height: 5vh; width: 5vh">
-               <img SRC="/cache/photo/#{athleteId}.png" ALT="Texte remplaçant l'image" TITLE="Texte à afficher" style="width:100%;height:100%">			
-                
       
       div(class='row')
-        div(class='col-sm-2')
-          block sidebar
-            ul(class='sidebar-nav')
-              li 
-                a(href='/catalog') Home
-              li
-                hr
-              li 
-                 
-                 a(href='/catalog/training/athlete/' + athleteId + '/training') #[strong Training]
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/competition') Competition
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/schedule') Schedule 
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/medic') Medical
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/mental') Mental
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/message') Messages 
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/form') Form 
-              li
-                hr
-              //li 
-                //a(href='/catalog/training/athlete/' + athleteId + '/training/objectives/inprogress') Objectives In Progress	
-              //li 
-                //a(href='/catalog/training/athlete/' + athleteId + '/training/objectives/finished') Objectives Finished
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/sessions') #[strong Explore Training]
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/training/objectives/create') Create an Objective
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/training/objectives') Objectives List
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/training/objectives/planning') My Planning
-              li
-                hr
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objectives') Calendar	
-              li 
-                a(href='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objective') New Training
-				 
+
+            <nav id="nav">
+                <ul id="navigation">
+                    <li><a href="/catalog" class="first">Home</a></li>
+                    
+                    <li><a href="#">Training &raquo;</a>
+                        <ul>
+                            <li>
+                                a(href='/catalog/training/athlete/' + athleteId + '/sessions' ) Training
+                            </li>
+                            <li>
+                                a(href='/catalog/training/athlete/' + athleteId + '/training/objectives') Objectives
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li><a href="#">Video &raquo;</a>
+                        <ul>
+                            <li>
+                                a(href='/video/athlete/' + athleteId + '/videos' ) List
+                            </li>
+                            <li>
+                                a(href='/video/athlete/' + athleteId + '/add' ) Add
+                            </li>
+                            <li>
+                                a(href='/video/athlete/' + athleteId + '/query' ) Query2
+                            </li>
+                            <li>
+                                a(href='/pubsub/athlete/' + athleteId + '/applichat/test/panel' ) Chat
+
+                            </li>
+
+                             
+                             
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        a(href='#') #{title}
+                        <ul>
+                                <li>
+                                    a(href='/catalog/training/athlete/' + athleteId + '/disconnect') disconnect
+                                </li>    
+                                <li>    
+                                    a(href='/catalog/training/athlete/' + athleteId + '/training/detail') properties
+
+                                     
+                        </ul>
+                             
+                   
+                    </li>  
+               
+                    <li>
+                        
+                            <div style="position: relative; height: 42px; width: 42px">
+                                <img SRC="/cache/photo/#{athleteId}.png" ALT="Texte remplaçant l'image" TITLE="Texte à afficher" style="width:100%;height:100%">    
+                                
+                        
+                    </li>
+                     
+                </ul>
+            </nav>
+      div(class='row')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+             div(class='col-sm-12')
+      div(class='row')
+      
+            <nav id="nav">
+                <ul id="navigation">
+                     
+                    <li> 
+                        a(href='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objectives') Calendar 
+                    </li>     
+                    <li> 
+                        a(href='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objective') New Training 
+                    </li>
+                    
+                    <li>
+                        a(href='/catalog/training/athlete/' + athleteId + '/session/' + sessionId + '/objectives/waiting') Training to be Close
+                        
+                    </li>  
+               
+                    
+                     
+                </ul>
+            </nav>
+      
+      
+      
+       
+      div(class='corps')  
+      
+           
+         
+             
+             
+          div(class='row')
+             
+            div(class='col-sm-4')
+            
+                block sidebar
+                    ul(class='sidebar-nav')
+                      
+                      li 
+                        a(href='/catalog/training/athlete/' + athleteId + '/sessions') #[strong Explore Training]
+                      li 
+                        a(href='/catalog/training/athlete/' + athleteId + '/training/objectives/create') Create an Objective
+                      li 
+                        a(href='/catalog/training/athlete/' + athleteId + '/training/objectives') Objectives List
+                      li 
+                        a(href='/catalog/training/athlete/' + athleteId + '/training/objectives/planning') My Planning
+                      li
+                        hr
+                      
+                      
+                  
+            div(class='col-sm-8')
+              block content
               
-        div(class='col-sm-10')
-          block content
+             
+            <link href="../../../../../../../menudrop/stylesheets/main.css" rel="stylesheet" type="text/css"/>
+            script(src='../../../../../../../menudrop/doubletaptogo.js')
+             
+            script.
+
+             
+                fatherOnLoad = function () {
+                //window.onload = function () {
+                
+                    $( '#nav li:has(ul)' ).doubleTapToGo();
+                    
+                };
+                     

@@ -92,6 +92,7 @@ exports.session_add_objective_get = function(req, res, next) {
 	  
 	 
 };
+
 exports.session_add_objective_post = function(req, res, next) {
 	 
 	 var athleteId = req.params.athleteid;
@@ -101,9 +102,9 @@ exports.session_add_objective_post = function(req, res, next) {
 	 console.log( "sessionId:" + sessionId);   
 	 
 	 req.checkBody('date_of_begin', 'Date must be specified.').notEmpty(); //We won't force Alphanumeric, because people might have spaces.
-     req.checkBody('date_of_begin', 'Date must be specified.').isDate();
+     //req.checkBody('date_of_begin', 'Date must be specified.').isDate();
 	 req.checkBody('date_of_end', 'Date must be specified.').notEmpty();
-	 req.checkBody('date_of_end', 'Date must be specified.').isDate();
+	 //req.checkBody('date_of_end', 'Date must be specified.').isDate();
 	 
 	 var objectiveId = req.body.objective;
 	 var date_of_end = req.body.date_of_end;
@@ -696,40 +697,67 @@ function objectiveList (req, res, next) {
    
 }
 
+exports.session_objective_waiting_list = function(req, res, next) {
+  console.log("controller athlete_objective_waiting_list athleteid:" + req.params.athleteid);
+  objectiveListTobeClosed( req, res, next );	
+};
+
 function objectiveListTobeClosed (req, res, next) {
 	
 	
     var athleteId = req.params.athleteid;
 	var sessionId = req.params.sessionid;
     var name = req.session.first_name + ' ' + req.session.family_name; 
-	
+	var session = req.session;	
+	 
+	 
+	 
 	 
 	
-	
-	console.log("controller objectiveListTobeClosed Objective list athleteid:" + athleteId +  " sessionid:" + sessionId  );
+	if ( sessionId ){
+		console.log("controller objectiveListTobeClosed Objective list athleteid:" + athleteId +  " sessionid:" + sessionId  );
+	}else{
+		console.log("controller objectiveListTobeClosed Objective list athleteid:" + athleteId   );
+	}
 	
     async.parallel({
 							
 		athleteObjectifInstanceList : function (callback) {
 			
-			if ( timeInterval == "day" || typeof timeInterval === "undefined" || timeInterval.trim() == ""   ){
+			 
 				 		
 				var currentDate = new Date(); 
 				 
 
-				AthleteObjectifInstance.find({  
-											   
-											   $and:[
-													  { createdBySession: sessionId },
-													  { createdByAthlete: athleteId },
-											          { date_of_begin: { $lt: currentDate } },
-													  { status: 'In Progress' }
-				                                    ]
+				if ( sessionId ){
+					AthleteObjectifInstance.find({  
+												   
+												   $and:[
+														  { createdBySession: sessionId },
+														  { createdByAthlete: athleteId },
+														  { date_of_begin: { $lt: currentDate } },
+														  { status: 'In Progress' }
+														]
 
-											
-											}, 'obj_title createdByAthlete createdBySession status date_of_begin date_of_end', callback)
+												
+												}, 'obj_title createdByAthlete createdBySession status date_of_begin date_of_end', callback)
+				}else{
+					AthleteObjectifInstance.find({  
+												   
+												   $and:[
+														   
+														  { createdByAthlete: athleteId },
+														  { date_of_begin: { $lt: currentDate } },
+														  { status: 'In Progress' }
+														]
+
+												
+												}, 'obj_title createdByAthlete createdBySession status date_of_begin date_of_end', callback)
+					
+					
+				}
 				
-			} 
+			  
 			
 	 
 		} 
@@ -739,12 +767,12 @@ function objectiveListTobeClosed (req, res, next) {
 		   
 		} else {
 			console.log("controller objectiveListTobeClosed  render athleteId:" + athleteId);
-			/*
-			res.render('athlete_training_session_objective_list', { title: name, title1: 'Calendar', 
+			
+			res.render('athlete_training_session_objective_list_waiting', { title: name, title1: 'Calendar', 
 			                                                        sessionId: sessionId, athleteId: athleteId.toString() ,
 																	objectiveIntance_list: resultsAthleteInstance.athleteObjectifInstanceList, 
-																	timeIntervalInput: timeInterval, moment: moment, session: session });
-            */
+																	moment: moment, session: session });
+            
 		  
 		}
 	 });	

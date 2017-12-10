@@ -69,3 +69,15 @@ nodemon
 ==========================================================================================
 C:\Users\jpl.DSONE\AppData\Roaming\npm\node_modules\nodemon\bin
 
+
+///REDIS NODE
+https://www.sitepoint.com/using-redis-node-js/
+
+/// redis windows
+https://github.com/MicrosoftArchive/redis/releases
+
+http://localhost:8082/persistency/cache/jpl/appli/setting/hset/color/red
+http://localhost:8082/persistency/cache/jpl/appli/setting/hget/color
+http://localhost:8082/persistency/cache/jpl/appli/setting/hgetall
+
+

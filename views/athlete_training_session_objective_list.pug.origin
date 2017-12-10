@@ -1,0 +1,430 @@
+extends athlete_layout_main_training_session
+
+block content
+  
+  //-h1 Welcome to #[strong #{title}] main page.
+  h2= title1
+  div(class='row')
+    div(class='col-md-1')
+      form(method='POST' action='')
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="day")
+            input(class="btn btn-primary" type='hidden',name="toto", value="tata")
+    div(class='col-md-1')
+      form(method='POST' action='')
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="week")
+    div(class='col-md-1')
+      form(method='POST' action='')
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="month")
+    div(class='col-md-1')
+      form(method='POST' action='')
+         div.input
+            input(class="btn btn-primary" type="submit",name="timeInterval", value="year")
+    //div(class='col-md-1')
+    //  form(method='POST' action='')
+    //     div.input
+    //        input#timeInterval.form-control(type='datetime-local', name='timeInterval', value=(timeInterval ) )
+  
+    
+  -var waitingCloseMode = 1
+   
+  //- begindate =  objectiveIntance.date_of_begin
+  if timeIntervalInput == 'day'
+    h2 #{moment(Date.now()).format('MM dddd')}
+  else if timeIntervalInput == 'week'
+    h2 Week #{moment().isoWeek()}
+  else if timeIntervalInput == 'month'
+    h2 #{moment(month).format('MMMM')}
+  else if timeIntervalInput == 'year'    
+    h2 #{moment(month).format('YYYY')}
+  else
+    h2 #{moment(Date.now()).format('MM dddd')}
+   
+   
+  div(class='row')
+    div(class='col-md-11')
+        <div id="visualization"></div>    
+
+  <br>  
+  div(class='row')
+    div(class='col-md-11')  
+        label(for='listview') List view:&nbsp
+        <input type='checkbox' class='ios8-switch' id='checkbox-3' checked='false' onclick='getClickFct(this);' >  
+   
+  <br>  
+  
+  div(class='row')  
+     
+   if objectiveIntance_list
+       
+      -var myrange = timeIntervalInput;
+      
+      <input type='hidden' id='timeIntervalInputId' value='  #{myrange} '  >
+      table(class='table table-bordered table-hover', id='tblistbis', style="display:none;", cellspacing="0")
+      table(class='table table-bordered table-hover', id='tblist', style="display:none;")
+       
+       //-Commentaire block suivant
+           tr
+             td Objective
+             td Begin
+             td End
+             td Term
+             
+             td Status
+             each objectiveIntance in objectiveIntance_list
+                
+                      //if waitingCloseMode == 1 &&  objectiveIntance.status == 'Finished' || new Date(objectiveIntance.date_of_end).getTime()  > Date.now() 
+                      //else
+                      tr
+                        td 
+                          a(href=objectiveIntance.url) #{objectiveIntance.obj_title}
+                          
+                        if timeIntervalInput == 'day'
+                          td #{moment(objectiveIntance.date_of_begin).format('hh:mm')}
+                        else if timeIntervalInput == 'week'          
+                          td #{moment(objectiveIntance.date_of_begin).format('dddd DD hh:mm')}
+                        else if timeIntervalInput == 'month'
+                          td #{moment(objectiveIntance.date_of_begin).format('DD dddd hh:mm')}          
+                        else
+                          td #{moment(objectiveIntance.date_of_begin).format('LL')}
+                        
+                        if timeIntervalInput == 'day'
+                          td #{moment(objectiveIntance.date_of_end).format('hh:mm')}
+                        else if timeIntervalInput == 'week'
+                          td #{moment(objectiveIntance.date_of_end).format('dddd DD hh:mm')}
+                        else if timeIntervalInput == 'month'
+                          td #{moment(objectiveIntance.date_of_end).format('DD dddd hh:mm')}          
+                        else
+                          td #{moment(objectiveIntance.date_of_end).format('LL')}
+                        
+                        - begin = objectiveIntance.date_of_begin
+                        - end = objectiveIntance.date_of_end
+                        //- diff = moment(end).unix() - moment(start).unix();
+                        - diff = moment(end) - moment(start);
+                        //- moment.duration(diff).format('hh:mm:ss')  
+                        td #{moment(diff).format('hh:mm')}
+                        //td #{objectiveIntance.obj_title} a(href=objectiveIntance.url)
+                        
+                        //if objectiveIntance.status == 'Finished'
+                        if  objectiveIntance.status == "In Progress" && new Date(objectiveIntance.date_of_end).getTime()  < Date.now() 
+                          <td  objectiveIntance.status align=right, bgcolor=red> #{objectiveIntance.status}
+                        else if  objectiveIntance.status == "Finished" && new Date(objectiveIntance.date_of_end).getTime()  < Date.now() 
+                          <td  objectiveIntance.status align=right, bgcolor=green> #{objectiveIntance.status}  
+                        else
+                          //td #{objectiveIntance.status}
+                          <td  objectiveIntance.status align=right, bgcolor=blue> #{objectiveIntance.status}
+               
+               
+               
+             else
+                li There are no objective
+                
+        
+      -var mydata = []; 
+      -var myrange = timeIntervalInput;
+      -var mytab = [];
+       
+      each objectiveIntance in objectiveIntance_list
+           
+              
+              -var rec = {};
+              -rec.urlobjective = objectiveIntance.url;
+              -rec.date_of_begin = objectiveIntance.date_of_begin;
+              -rec.date_of_end = objectiveIntance.date_of_end;
+              -rec.obj_title = objectiveIntance.obj_title;
+              -rec.status = objectiveIntance.status;
+              -console.log("rec1:" + rec.urlobjective);
+              -mydata.push ( rec );  
+              -console.log("mydata:" + JSON.stringify(mydata));
+             
+            
+             
+            
+              - begin = objectiveIntance.date_of_begin
+              - end = objectiveIntance.date_of_end
+             
+              - diff = moment(end) - moment(start);
+              
+              -tab = [];
+              -tab.push( objectiveIntance.obj_title );
+              -tab.push( objectiveIntance.date_of_begin );
+              -tab.push( objectiveIntance.date_of_end );
+              //-tab.push( '"' + diff + '"' );
+              -tab.push( objectiveIntance.status );
+              -elt = objectiveIntance.url;
+              -tab.push( elt );
+              -mytab.push( tab );
+            
+      -var mydata1 = JSON.stringify(mydata);        
+      <input type='hidden' id='objectiveListInputId' value='  #{mydata1} '  >
+     
+      -var mytab1 = JSON.stringify(mytab);        
+      <input type='hidden' id='objectiveTab' value='  #{mytab1} '  >
+      -console.log("FIN mydata:" + JSON.stringify(mydata));      
+   else
+    li There are no objective
+  
+  
+
+  
+  script(src="../../../../../../../node_modules/vis/dist/vis.js")
+  script(src="../../../../../../../node_modules/moment/moment.js")
+  script(src="http://code.jquery.com/jquery-1.11.1.min.js")
+   
+  <link href="../../../../../../../node_modules/vis/dist/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/stylesheets/timeline.css" rel="stylesheet" type="text/css"/>
+  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"  type="text/css"/>
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+  script(src='//cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js')
+  
+  
+   script(type="text/javascript" ) var myChart;
+   script.
+      $(document).ready( function() {
+         //$('#tblist').DataTable();
+         //console.log(myChart);
+         
+      });
+     
+      window.onload = function () {
+            
+           
+           
+           $("table").hide();
+           
+           var objectiveTab = document.getElementById('objectiveTab').value;
+           createTable( objectiveTab );    
+            
+           var objectiveList = document.getElementById('objectiveListInputId').value;
+           var range = document.getElementById('timeIntervalInputId').value;
+           
+           document.getElementById("checkbox-3").checked = false; 
+           $("table").show();
+             
+           getDataTimeLine( objectiveList, range );
+           
+             
+           
+      }   
+      getClickFct = function( cb ) {
+        console.log ( "cb cb:"+ cb.checked );
+        //var tblist = document.getElementById('tblist');
+        //$('#tblist').DataTable();
+        if ( cb.checked == true ){
+            $("table").show();
+        }else{
+            $("table").hide();
+        }
+      }      
+      
+      getDataTimeLine = function( objectiveDataString, timeIntervalInput ) {
+        //alert ("getDataTimeLine objectiveDatas:" + objectiveDataString );
+
+          var objectiveData = JSON.parse ( objectiveDataString );
+         
+          var container = document.getElementById('visualization');
+          
+          var data = [];
+          
+          for ( var i = 0; i < objectiveData.length; i++ ){
+            var record = {};
+            record.id = objectiveData[i]._id;
+            record.content = objectiveData[i].obj_title;
+            record.start = objectiveData[i].date_of_begin;
+            record.end = objectiveData[i].date_of_end;
+            record.urlobjective = objectiveData[i].urlobjective;
+            record.title = '<table border="1">';
+            record.title = record.title + '<tr><td>Status</td><td>' + objectiveData[i].status + '</td></tr>';
+            
+            var a = moment(objectiveData[i].date_of_end);
+            var b = moment(objectiveData[i].date_of_begin);
+            var diff =  a.diff(b);
+            record.title = record.title + '<tr><td>Duration</td><td>' + moment(diff).format('hh:mm') + '</td></tr>';
+            //record.title = record.title + '<tr><td>Duration</td><td>' + moment((moment(objectiveData[i].date_of_end)) - (moment(objectiveData[i].date_of_begin))).format('hh:mm') + '</td></tr>';
+            if ( objectiveData[i].status == "In Progress" && new Date(objectiveData[i].date_of_end).getTime()  < Date.now()   ){
+                // l'entrainement est terminé mais le formulaire n'est pas remplit entierment
+                record.className = 'red';
+            }else if ( objectiveData[i].status == "Finished" && new Date(objectiveData[i].date_of_end).getTime()  < Date.now()  ){
+                // l'entrainement est terminé  le formulaire est remplit entierment
+                record.className = 'green';
+            }else{
+                record.className = 'blue';
+            }
+            /*
+            if ( timeIntervalInput.trim() == 'day' ){
+              record.title = record.title + '<tr><td>Start</td><td>' + moment(objectiveData[i].date_of_begin).format('hh:mm') + '</td></tr>';
+              record.title = record.title + '<tr><td>End</td><td>' + moment(objectiveData[i].date_of_end).format('hh:mm') + '</td></tr>';
+            }else if ( timeIntervalInput.trim() == 'week' ){
+              record.title = record.title + '<tr><td>Start</td><td>' + moment(objectiveData[i].date_of_begin).format('dddd hh:mm') + '</td></tr>';
+              record.title = record.title + '<tr><td>End</td><td>' + moment(objectiveData[i].date_of_end).format('dddd hh:mm') + '</td></tr>';
+            }else if ( timeIntervalInput.trim() == 'month' ){
+              record.title = record.title + '<tr><td>Start</td><td>' + moment(objectiveData[i].date_of_begin).format('MM dddd hh:mm') + '</td></tr>';
+              record.title = record.title + '<tr><td>End</td><td>' + moment(objectiveData[i].date_of_end).format('MM dddd hh:mm') + '</td></tr>';
+            }else{
+              record.title = record.title + '<tr><td>Start</td><td>' + moment(objectiveData[i].date_of_begin).format('LL') + '</td></tr>';
+              record.title = record.title + '<tr><td>End</td><td>' + moment(objectiveData[i].date_of_end).format('LL') + '</td></tr>';
+            }  
+            */
+            record.title = record.title + '<tr><td>Start</td><td>' + moment(objectiveData[i].date_of_begin).format('hh:mm A LL') + '</td></tr>';
+            record.title = record.title + '<tr><td>End</td><td>' + moment(objectiveData[i].date_of_end).format('hh:mm A LL') + '</td></tr>';
+            
+            record.title = record.title + '</table>';
+            
+            data.push( record );
+          
+          }
+          
+          
+
+          // Create a DataSet (allows two way data-binding)
+          /*
+          var items = new vis.DataSet([
+            {id: 1, content: 'A', start: '2015-02-09T04:00:00'},
+            {id: 2, content: 'B', start: '2015-02-09T14:00:00'},
+            {id: 3, content: 'C', start: '2015-02-09T16:00:00'},
+            {id: 4, content: 'D', start: '2015-02-09T17:00:00'},
+            {id: 5, content: 'E', start: '2015-02-10T03:00:00'}
+          ]);
+          */
+          var items = new vis.DataSet( data );
+
+          // Configuration for the Timeline
+          var options = {
+            editable: true,
+
+            // always snap to full hours, independent of the scale
+            snap: function (date, scale, step) {
+              var hour = 60 * 60 * 1000;
+              return Math.round(date / hour) * hour;
+            },
+            tooltip: {
+              followMouse: true
+            }
+
+            // to configure no snapping at all:
+            //
+            //   snap: null
+            //
+            // or let the snap function return the date unchanged:
+            //
+            //   snap: function (date, scale, step) {
+            //     return date;
+            //   }
+          };
+
+          // Create a Timeline
+          var timeline = new vis.Timeline(container, items, options);
+          timeline.on('click', function ( properties) {
+              
+              var record = this.itemsData.get(properties.item);
+              console.log('click record.url:' + record.urlobjective );
+              
+              //var x = location.href;
+              var loc = window.location;
+              var withoutQuery = loc.hostname + loc.pathname;
+              var includingProtocol = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '') + loc.pathname;
+              var urltarget = includingProtocol + '../../../../../../../..' + record.urlobjective;
+              console.log('urltarget:' + urltarget );
+              window.location.href= urltarget ;
+
+              //$.get( record.urlobjective ,function( data, status ) {
+              //        console.log( "call url status:" + status );
+              //},'html');
+          });
+
+          
+          
+          if  ( timeIntervalInput == 'day' ){
+            //h2 #{moment(Date.now()).format('MM dddd')}
+            var debut = moment(Date.now()).format('MM dddd');
+            var fin = moment(Date.now()).format('MM dddd');
+            timeline.setWindow( debut, fin);
+            
+          }else if ( timeIntervalInput.trim() == 'week' ){
+            //var curr = new Date;
+            //var firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
+            //var lastday = new Date(curr.setDate(curr.getDate() - curr.getDay()+6));
+            var startOfWeek = moment().startOf("isoWeek").toDate();
+            var endOfWeek = moment().endOf("isoWeek").toDate();
+            timeline.setWindow( startOfWeek, endOfWeek );
+            
+          }else if ( timeIntervalInput == 'month' ){
+             
+            var startOfMonth = moment().startOf("month").toDate();
+            var endOfMonth = moment().endOf("month").toDate();
+            timeline.setWindow( startOfMonth, endOfMonth );
+          }else if ( timeIntervalInput == 'year' ){    
+            var start  = moment().startOf("year").toDate();
+            var end  = moment().endOf("year").toDate();
+            timeline.setWindow( start , end  );
+          }else{
+            var debut = moment(Date.now()).format('MM dddd');
+            var fin = moment(Date.now()).format('MM dddd');
+            timeline.setWindow( debut, fin);
+            
+          }
+      }
+      createTable = function ( data ){
+                var dataSet = JSON.parse( data );
+                                
+                $('#tblistbis').DataTable( {
+                    data: dataSet,
+                    "order": [[ 3, "desc" ]],
+                    columns: [
+                        { title: "Objective" },
+                        { title: "Begin" },
+                        { title: "End" },
+                        { title: "Status" }
+                        
+                    ],
+                    "createdRow": function( row, data, dataIndex ) {
+                        if ( data[3] == "In Progress" && new Date(data[2]).getTime()  < Date.now() ) {
+                          $('td', row).css('background-color', 'Red');
+                        }else if ( data[3] == "Finished" && new Date(data[2]).getTime()  < Date.now() ) {
+                          $('td', row).css('background-color', 'Green'); 
+                        }else{
+                          $('td', row).css('background-color', 'Blue'); 
+                        }
+                    }
+                } );
+                
+                var table = $('#tblistbis').DataTable();
+                
+                
+                $('#tblistbis tbody').on( 'click', 'tr', function () {
+                    console.log( "click" );
+                    //table.row('.selected');
+                    var tab = table.row(this).data();
+                    
+                    
+                    
+                    var loc = window.location;
+                    var withoutQuery = loc.hostname + loc.pathname;
+                    var includingProtocol = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+                    console.log('includingProtocol:' + includingProtocol );
+                    var urltarget = includingProtocol + tab[4];
+                    console.log('urltarget:' + urltarget );
+                    window.location.href= urltarget ;
+                 
+                } );
+                
+                /*
+            var table = document.getElementById("tblist");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            cell1.innerHTML = "NEW CELL1";
+            cell2.innerHTML = "NEW CELL2";
+            */
+      
+      }
+          
+    
+      
+

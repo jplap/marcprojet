@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1= title
+    p Connecting...
+
+    input(type='text', disabled)
+    button(disabled) submit
+    div.message
+        ul
+
+    script(src='https://code.jquery.com/jquery-1.10.1.min.js')
+    script(src='../../../../../../../node_modules/socket.io/lib/socket.js')
+    script(src='../../../../../../../node_modules/events/events.js')
+    script(src="/viewsjavascripts/pubsubPanel.js")
+    //script.

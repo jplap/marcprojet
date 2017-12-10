@@ -23,33 +23,42 @@ block content
       
       li #[strong Sessions:] !{athletesession_count} 
       li #[strong Objectives:] !{athleteobjectif_count} 
-      li #[strong Training to close:] !{athleteobjectifinstance_count}
+      div(class='row')
+        div(class='col-md-2')
+            li #[strong Training to close:] !{athleteobjectifinstance_count}
+        div(class='col-md-1')
+            form(method='GET' action='/catalog/training/athlete/' + athleteId + '/objectives/waiting')
+                div.input
+                    input(class="btn btn-primary" type="submit",name="view", value="view")
 
     br 
     
     -var mydata = athlete._id;
     -var fileid = athlete.photo;
-    div( ) 
-      //div(class="chart" style="width:100%;height:30%")
-      <div id="wrapper" style="position: relative; height: 15vh; width: 15vh">    
-     
-        img(id="myimg" src="*" style="width:100%;height:100%" )
-        <input type='hidden' id='athleteid' value=#{athlete._id}  >
-        <input type='hidden' id='athletephoto' value=#{athlete.photo}  >
-         
-
-    div(class='col-md-1')
-        button(onclick="getDataView1('" + mydata + "','" + fileid + "')", title="reLoad", style="display: none;")|reLoad
-
-
-    br 
     div(class='row')
+     div( ) 
+      div(class='col-md-1')  
+       <div  style="position:     ative; height: 15vh; width: 15vh">    
+     
+            img(id="myimg" src="*" style="width:100%;height:100%" )
+            <input type='hidden' id='athleteid' value=#{athlete._id}  >
+            <input type='hidden' id='athletephoto' value=#{athlete.photo}  >
+       </div>    
+    
+    div(class='row')
+     div(class='col-md-2')
+     div(class='col-md-2')
+        button(onclick="getDataView1('" + mydata + "','" + fileid + "')", title="    oad", style="display: none;")|    oad
+
+
+     br 
+      
      div(class='col-md-3')
-      div.form-group
-       form(method='POST' action='fileupload' enctype="multipart/form-data")
-        label(for='exampleInputFile') Modify the photo:
-        input(type='file', name='exampleInputFile' )
-        input(type='submit', name='imgName', value='Upload')
+       div.form-group
+        form(method='POST' action='fileupload' enctype="multipart/form-data")
+         label(for='exampleInputFile') Modify the photo:
+         input(type='file', name='exampleInputFile' )
+         input(type='submit', name='imgName', value='Upload')
       
     br
 
