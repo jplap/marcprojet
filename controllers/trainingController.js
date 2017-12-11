@@ -128,13 +128,15 @@ exports.athlete_register_get = function(req, res) {
      
 	 res.render('athlete_register', { title: 'Athlete Register' });
 };
-// Handle Athlete create on POST 
+// Handle Athlete create on POST
+
 exports.athlete_register_post = function(req, res, next) {
    
     req.checkBody('first_name', 'First name must be specified.').notEmpty(); //We won't force Alphanumeric, because people might have spaces.
     req.checkBody('family_name', 'Family name must be specified.').notEmpty();
     req.checkBody('family_name', 'Family name must be alphanumeric text.').isAlpha();
-    req.checkBody('date_of_birth', 'Invalid date').optional({ checkFalsy: true }).isDate();
+    //req.checkBody('date_of_birth', 'Invalid date').optional({ checkFalsy: true }).isDate();
+
      
     
     req.sanitize('first_name').escape();

@@ -183,7 +183,7 @@ app.listen(8082, function () {
 var httpsServer = https.createServer(options, app);
 
  
-httpsServer.listen(80,'0.0.0.0', function () {
+httpsServer.listen(8082,'0.0.0.0', function () {
   console.log('Server app https listening on port 8082!')
   
 })
